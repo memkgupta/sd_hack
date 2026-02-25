@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Expense {
     private int id;
-    private int userId; // paid by
+    private String userId; // paid by
     private double amount;
     private String description;
     private List<Integer> participants;
@@ -34,11 +34,11 @@ public class Expense {
         this.participants = participants;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

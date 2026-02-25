@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class ExpenseService {
     private final HashMap<Integer, Expense> expenses;
-    private final HashMap<Integer , List<Expense>> userExpenses;
+    private final HashMap<String , List<Expense>> userExpenses;
     private final HashMap<Integer,List<Expense>> groupExpenses;
     public ExpenseService() {
         this.groupExpenses = new HashMap<>();
@@ -23,7 +23,7 @@ public class ExpenseService {
        }
        this.userExpenses.get(expense.getUserId()).add(expense);
     }
-    public List<Expense> getExpensesPaidBy(int userId) {
+    public List<Expense> getExpensesPaidBy(String userId) {
         return this.userExpenses.get(userId);
     }
     public List<Expense> getAllExpenses() {
