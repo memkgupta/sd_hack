@@ -6,7 +6,7 @@ import java.util.Set;
 public class ExpenseService {
     private final HashMap<Integer, Expense> expenses;
     private final HashMap<String , List<Expense>> userExpenses;
-    private final HashMap<Integer,List<Expense>> groupExpenses;
+    private final HashMap<String,List<BalanceEntry>> groupExpenses;
     public ExpenseService() {
         this.groupExpenses = new HashMap<>();
         userExpenses = new HashMap<>();
@@ -17,9 +17,13 @@ public class ExpenseService {
        this.userExpenses.putIfAbsent(
                expense.getUserId(),new ArrayList<>()
        );
-       for(Integer id : expense.getParticipants()) {
+       double splitamount = expense.getAmount()/(expense.getParticipants().size());
+       for(String id : expense.getParticipants()) {
+
            this.groupExpenses.putIfAbsent(id, new ArrayList<>());
-                   this.groupExpenses.get(id).add(expense);
+                   this.groupExpenses.get(id).add(
+                           new BalanceEntry(id , expense.getUserId() , splitamount)
+                   );
        }
        this.userExpenses.get(expense.getUserId()).add(expense);
     }
@@ -29,5 +33,7 @@ public class ExpenseService {
     public List<Expense> getAllExpenses() {
         return  new ArrayList<>(this.expenses.values());
     }
-
+    public List<BalanceEntry> getEntries(String userId) {
+        return this.groupExpenses.getOrDefault(userId,new ArrayList<>());
+    }
 }

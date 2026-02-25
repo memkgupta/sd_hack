@@ -6,7 +6,7 @@ public class Expense {
     private String userId; // paid by
     private double amount;
     private String description;
-    private List<Integer> participants;
+    private List<String> participants;
     private Timestamp createdAt;
 
 
@@ -26,11 +26,11 @@ public class Expense {
         this.createdAt = createdAt;
     }
 
-    public List<Integer> getParticipants() {
+    public List<String> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<Integer> participants) {
+    public void setParticipants(List<String> participants) {
         this.participants = participants;
     }
 
